@@ -1,45 +1,60 @@
-{% set name = "<PLEASE ADD PKG NAME>" %}
-{% set version = "<PLEASE ADD PKG VERSION>" %}
+{% set name = "pandoc" %}
+{% set version = "2.4" %}
 
 package:
-  name: {{ name|lower }}
+  name: python-{{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: <sha256>
+  # use GH to include functional upstream testing
+  url: https://github.com/boisgera/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
+  sha256: 2d010068653c441eceb554ed83c7fc7d78a7fc13b9a90027abb4daed556d74df
+  patches:
+    - patches/0001-replace-strict-yaml.patch
 
 build:
-  number: 0
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-  skip: True  # [py<38]
+  number: 0
 
 requirements:
   host:
     - python
     - pip
+    - setuptools
+    - wheel
   run:
     - python
+    - plumbum
+    - ply
+    - pandoc
 
 test:
   imports:
-    - {{ name.replace('-', '.') }}
-  requires:
-    - pip
+    - pandoc
   commands:
     - pip check
+    - python test.py
+  requires:
+    - python
+    - pip
+    - pyyaml
+  source_files:
+    - mkdocs/
+    - mkdocs.yml
+    - test.py
 
 about:
-  home: <PLEASE ADD HOME URL>
-  summary: <PLEASE ADD SUMMARY>
-  description: |
-    <PLEASE ADD DESCRIPTION>
-  license: <PLEASE ADD LICENSE>
-  license_family: <PLEASE ADD LICENSE_FAMILY>
-  license_file: <PLEASE_ADD_LICENSE_FILE>
-  dev_url: <PLEASE ADD DEV URL>
-  doc_url: <PLEASE ADD DOC URL>
+  home: https://github.com/boisgera/pandoc
+  doc_url: https://boisgera.github.io/pandoc
+  dev_url: https://github.com/boisgera/pandoc
+  license: MIT
+  license_family: MIT
+  license_file: LICENSE
+  summary: The Pandoc Python Library brings Pandoc's document model to Python
+  description: Pandoc is the awesome open-source command-line tool that converts documents from one format to another. 
+    The project was initiated by John MacFarlane; under the hood, it's a Haskell library.
+    The Pandoc Python Library brings Pandoc's document model to Python.
 
 extra:
   recipe-maintainers:
-    - Jrice1317
+    - mohamedlarbisentissi
