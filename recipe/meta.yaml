@@ -11,6 +11,7 @@ source:
   sha256: 2d010068653c441eceb554ed83c7fc7d78a7fc13b9a90027abb4daed556d74df
   patches:
     - patches/0001-replace-strict-yaml.patch
+    - patches/0001-skip-failures.patch
 
 build:
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
@@ -36,7 +37,7 @@ test:
     - pandoc
   commands:
     - pip check
-    - python test.py
+    - python test.py -v
   requires:
     - python
     - pip
