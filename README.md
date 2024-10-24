@@ -1,13 +1,13 @@
-About <pkg_name>-feedstock
+About python-pandoc-feedstock
 =======================
 
 Feedstock license: [BSD-3-Clause](LICENSE)
 
-Home: <home_url>
+Home: https://github.com/boisgera/pandoc
 
-Package license: <pkg_license>
+Package license: MIT
 
-Summary: <pkg_summary>
+Summary: The Pandoc Python Library brings Pandoc's document model to Python
 
 
 Current release info
@@ -15,19 +15,19 @@ Current release info
 
 | Name | Downloads | Version | Platforms |
 | --- | --- | --- | --- |
-| [![Conda Recipe](https://img.shields.io/badge/recipe-<pkg_name>-green.svg)](https://anaconda.org/anaconda/<pkg_name>) | [![Conda Downloads](https://img.shields.io/conda/dn/anaconda/<pkg_name>.svg)](https://anaconda.org/anaconda/<pkg_name>) | [![Conda Version](https://img.shields.io/conda/vn/anaconda/<pkg_name>.svg)](https://anaconda.org/anaconda/<pkg_name>) | [![Conda Platforms](https://img.shields.io/conda/pn/anaconda/<pkg_name>.svg)](https://anaconda.org/anaconda/<pkg_name>) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-python-pandoc-green.svg)](https://anaconda.org/anaconda/python-pandoc) | [![Conda Downloads](https://img.shields.io/conda/dn/anaconda/python-pandoc.svg)](https://anaconda.org/anaconda/python-pandoc) | [![Conda Version](https://img.shields.io/conda/vn/anaconda/python-pandoc.svg)](https://anaconda.org/anaconda/python-pandoc) | [![Conda Platforms](https://img.shields.io/conda/pn/anaconda/python-pandoc.svg)](https://anaconda.org/anaconda/python-pandoc) |
 
-Installing <pkg_name>
+Installing python-pandoc
 ==================
 
-Installing `<pkg_name>` from the main channel can be achieved by:
+Installing `python-pandoc` from the main channel can be achieved by:
 
 ```
-conda install <pkg_name>
+conda install python-pandoc
 ```
 
-It is possible to list all of the versions of `<pkg_name>` available on your platform with `conda`:
+It is possible to list all of the versions of `python-pandoc` available on your platform with `conda`:
 
 ```
-conda search <pkg_name>
+conda search python-pandoc
 ```
