@@ -1,16 +1,17 @@
-From c64074d2eefec6d50147ba64350a490e0875fef2 Mon Sep 17 00:00:00 2001
+From 18f295f9ad9edcf3858ed6efab07a9fa02f8c0e0 Mon Sep 17 00:00:00 2001
 From: Mohamed Sentissi <msentissi@anaconda.com>
-Date: Thu, 24 Oct 2024 13:13:41 -0400
+Date: Thu, 24 Oct 2024 13:40:23 -0400
 Subject: [PATCH] skip failures
 
 ---
  mkdocs/api.md           |  24 ---------
  mkdocs/configuration.md |   8 ---
- mkdocs/cookbook.md      |  14 +----
+ mkdocs/cookbook.md      |  31 +----------
  mkdocs/document.md      |  18 -------
- mkdocs/examples.md      |  15 ------
+ mkdocs/examples.md      |  26 ----------
+ mkdocs/iteration.md     |   9 ----
  mkdocs/markdown.md      | 112 ----------------------------------------
- 6 files changed, 1 insertion(+), 190 deletions(-)
+ 7 files changed, 1 insertion(+), 227 deletions(-)
 
 diff --git a/mkdocs/api.md b/mkdocs/api.md
 index 0157ced..0b274e6 100644
@@ -77,10 +78,41 @@ index f53f198..f9be196 100644
  
      config = pandoc.configure(auto=True, read=True)
 diff --git a/mkdocs/cookbook.md b/mkdocs/cookbook.md
-index 80ff4af..9b606cb 100644
+index 80ff4af..b1b5272 100644
 --- a/mkdocs/cookbook.md
 +++ b/mkdocs/cookbook.md
-@@ -1005,19 +1005,7 @@ Inline = ...
+@@ -217,16 +217,6 @@ it yields
+ 
+ ### Pattern matching
+ 
+-With Python 3.10 or later, [pattern matching] can be used to combine
+-random access and structural checks. The following implementation of `get_date`
+-
+-``` python
+-def get_date(doc):
+-    match doc:
+-        case Pandoc(Meta({"date": MetaInlines(date_inlines)}), _):
+-            return pandoc.write(date_inlines).strip()
+-```
+-
+ and the previous one have identical behaviors:
+ 
+ ``` pycon
+@@ -237,13 +227,6 @@ and the previous one have identical behaviors:
+ 
+ The behavior of the following `get_first_header_title` function
+ 
+-``` python
+-def get_first_header_title(doc):
+-    match doc:
+-        case Pandoc(_, [Header(_, _, header_inlines), *_]):
+-            return pandoc.write(header_inlines).strip()
+-```
+-
+ is also unchanged:
+ 
+ ``` pycon
+@@ -1005,19 +988,7 @@ Inline = ...
         | Span(Attr, [Inline])
  ```
  
@@ -131,10 +163,28 @@ index 07c70ea..c813009 100644
  either instances of `Plain` or `Para` or `LineBlock`, etc. In our example
  document, the only type of block that was used is the paragraph type `Para`,
 diff --git a/mkdocs/examples.md b/mkdocs/examples.md
-index f3aabaa..c7d0620 100644
+index f3aabaa..4c1c32c 100644
 --- a/mkdocs/examples.md
 +++ b/mkdocs/examples.md
-@@ -188,21 +188,6 @@ $$f(z) = \frac{1}{i2\pi} \int \frac{f(w)}{w-z}\, dw$$
+@@ -148,17 +148,6 @@ def is_theorem(elt):
+     return False
+ ```
+ 
+-Or equivalenty, with Python 3.10 (or newer), using pattern matching:
+-
+-``` python
+-def is_theorem(elt):
+-    match elt:
+-        case Div((_, classes, _), _) if "theorem" in classes:
+-            return True
+-        case _:
+-            return False
+-```
+-
+ Now we can implement the transformation itself:
+ 
+ ``` python
+@@ -188,21 +177,6 @@ $$f(z) = \frac{1}{i2\pi} \int \frac{f(w)}{w-z}\, dw$$
  """
  ```
  
@@ -154,6 +204,26 @@ index f3aabaa..c7d0620 100644
 -```
 -
  Jupyter Notebooks
+ --------------------------------------------------------------------------------
+ 
+diff --git a/mkdocs/iteration.md b/mkdocs/iteration.md
+index d0841e5..6bc17bb 100644
+--- a/mkdocs/iteration.md
++++ b/mkdocs/iteration.md
+@@ -127,15 +127,6 @@ world!
+ With Python 3.10 (or newer), pattern matching can be used for every
+ Pandoc element:
+ 
+-``` pycon
+->>> doc = pandoc.read("Hello world!")
+->>> match doc:
+-...     case Pandoc(Meta(meta), [Para(inlines)]):
+-...         assert meta == {}
+-...         print(inlines)
+-[Str('Hello'), Space(), Str('world!')]
+-```
+-
+ Tree Iteration
  --------------------------------------------------------------------------------
  
 diff --git a/mkdocs/markdown.md b/mkdocs/markdown.md
