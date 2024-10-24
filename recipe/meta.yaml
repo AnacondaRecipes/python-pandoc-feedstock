@@ -14,6 +14,7 @@ source:
     - patches/0001-skip-failures.patch
 
 build:
+  skip: True            # [s390x]
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   number: 0
 
