@@ -1,0 +1,32 @@
+From a446c16926a399c8bbc256300067eae0c10bea91 Mon Sep 17 00:00:00 2001
+From: Mohamed Sentissi <msentissi@anaconda.com>
+Date: Wed, 23 Oct 2024 16:14:32 -0400
+Subject: [PATCH] replace strict yaml
+
+Use pyyaml instead of strictyaml in the test script (strictyaml not available at the moment).
+
+---
+ test.py | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/test.py b/test.py
+index 8cf9daf..2aa4765 100755
+--- a/test.py
++++ b/test.py
+@@ -12,11 +12,11 @@ import sys
+ import tempfile
+ 
+ # Third-Party Libraries
+-import strictyaml
++from yaml import load, Loader
+ 
+ # Test Files
+ # ------------------------------------------------------------------------------
+-mkdocs_nav = strictyaml.load(open("mkdocs.yml").read())["nav"].data
++mkdocs_nav = load(open("mkdocs.yml").read(), Loader)["nav"]
+ test_files = ["mkdocs/" + list(item.values())[0] for item in mkdocs_nav]
+ 
+ # Sandbox the Test Files
+-- 
+2.39.3 (Apple Git-146)
+
