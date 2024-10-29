@@ -3,6 +3,8 @@ From: Mohamed Sentissi <msentissi@anaconda.com>
 Date: Wed, 23 Oct 2024 16:14:32 -0400
 Subject: [PATCH] replace strict yaml
 
+Use pyyaml instead of strictyaml in the test script (strictyaml not available at the moment).
+
 ---
  test.py | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
