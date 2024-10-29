@@ -3,6 +3,10 @@ From: Mohamed Sentissi <msentissi@anaconda.com>
 Date: Thu, 24 Oct 2024 13:40:23 -0400
 Subject: [PATCH] skip failures
 
+We patch out some tests because they expect pandoc 3.2 as a dependency (the version on CF), but we have an earlier version on defaults.
+
+One failed because it needs a PDF engine such as pdflatex, which is optional.
+
 ---
  mkdocs/api.md           |  24 ---------
  mkdocs/configuration.md |   8 ---
